@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 7805710}
   - component: {fileID: 7805709}
   - component: {fileID: 7805708}
-  - component: {fileID: 7805707}
+  - component: {fileID: 7805712}
   m_Layer: 0
   m_Name: Teleporter
   m_TagString: Teleporter
@@ -144,21 +144,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &7805707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7805706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0f2a5f1823bd3347b82ee52b914aca9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1781297189}
-  teleTwin: {fileID: 312121554}
-  cooldownDuration: 5
 --- !u!64 &7805708
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -246,6 +231,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7805712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca96c81693f0424d907ff32a51ac83a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPositioner: {fileID: 312121554}
 --- !u!4 &8408988 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 437138786528195758, guid: 8b2507b92ebe9524a9f194db32a4d49f,
@@ -1947,12 +1945,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 312121554}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0f2a5f1823bd3347b82ee52b914aca9, type: 3}
+  m_Script: {fileID: 11500000, guid: ca96c81693f0424d907ff32a51ac83a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1781297189}
-  teleTwin: {fileID: 7805706}
-  cooldownDuration: 5
+  targetPositioner: {fileID: 7805706}
 --- !u!1001 &318454254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7038,6 +7034,7 @@ GameObject:
   - component: {fileID: 1781297191}
   - component: {fileID: 1781297190}
   - component: {fileID: 1781297195}
+  - component: {fileID: 1781297196}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -7173,6 +7170,19 @@ MonoBehaviour:
   rb: {fileID: 1781297190}
   speed: 80
   health: 5
+--- !u!114 &1781297196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781297189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f2a5f1823bd3347b82ee52b914aca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownDuration: 5
 --- !u!4 &1782265260 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 437138786528195758, guid: 8b2507b92ebe9524a9f194db32a4d49f,

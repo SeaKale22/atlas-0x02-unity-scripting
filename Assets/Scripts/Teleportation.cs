@@ -1,21 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
+// Ensures we are on the player object
+[RequireComponent(typeof(PlayerController))]
 public class Teleportation : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject teleTwin;
+    // PlayerController player;
     [SerializeField] private float cooldownDuration;
     bool isOnCooldown = false;
-    void OnTriggerEnter(Collider other)
+    private float yValue;
+
+    private void Start()
+    {
+        // player = this.gameObject.GetComponent<PlayerController>();
+        yValue = this.transform.position.y;
+
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag ("Teleporter"))
+        {
+            go.GetComponent<TeleporterObject>().Instantiate(this);
+        }
+    }
+
+    public void Trigger(Vector3 targetLocation)
     {
         if (!isOnCooldown)
         {
-            Teleportation teleTwinScript = teleTwin.GetComponent<Teleportation>();
-            TeleportPlayer();
+            TeleportPlayer(targetLocation);
             Debug.Log("Teleported!");
-            StartCoroutine(teleTwinScript.CoolDown(cooldownDuration));
             StartCoroutine(CoolDown(cooldownDuration));
         }
         else
@@ -30,12 +44,8 @@ public class Teleportation : MonoBehaviour
         yield return new WaitForSeconds(duration);
         isOnCooldown = false;
     }
-    void TeleportPlayer()
+    void TeleportPlayer(Vector3 targetPosition)
     {
-        float targetX = teleTwin.transform.position.x;
-        float targetZ = teleTwin.transform.position.z;
-
-        Vector3 targetPosition = new Vector3(targetX, player.transform.position.y, targetZ);
-        player.transform.position = targetPosition;
+        this.transform.position = new Vector3(targetPosition.x, yValue, targetPosition.z);
     }
 }

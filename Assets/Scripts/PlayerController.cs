@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,15 @@ public class PlayerController : MonoBehaviour
     {
         // Get the Rigidbody component attached to the GameObject
         rb = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        if (health <= 0)
+        {
+            Debug.Log("Game Over!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     void FixedUpdate()
@@ -38,6 +48,10 @@ public class PlayerController : MonoBehaviour
         {
             health--;
             Debug.Log($"Health: {health}");
+        }
+        if (other.CompareTag("Goal"))
+        {
+            Debug.Log("You win!");
         }
     }
 }

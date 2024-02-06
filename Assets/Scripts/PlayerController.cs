@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody rb;
     public float speed = 100f;
+    private int score = 0;
 
     void Start()
     {
@@ -22,5 +23,15 @@ public class PlayerController : MonoBehaviour
         movement = movement.normalized * speed * Time.deltaTime;
 
         rb.AddForce(movement, ForceMode.VelocityChange);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Pickup"))
+        {
+            score++;
+            Debug.Log($"Score: {score}");
+            Destroy(other.gameObject);
+        }
     }
 }

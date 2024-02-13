@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public int health = 5;
     public TMP_Text scoreText;
     public TMP_Text healthText;
+    public TMP_Text winLoseText;
+    public Image winLoseBG;
 
     void Start()
     {
@@ -23,8 +26,9 @@ public class PlayerController : MonoBehaviour
     {
         if (health <= 0)
         {
-            Debug.Log("Game Over!");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            LoseCon();
+            // Debug.Log("Game Over!");
+            StartCoroutine(LoadScene(3));
         }
     }
 
@@ -56,7 +60,8 @@ public class PlayerController : MonoBehaviour
         }
         if (other.CompareTag("Goal"))
         {
-            Debug.Log("You win!");
+            GoalReached();
+            // Debug.Log("You win!");
         }
     }
 
@@ -68,5 +73,27 @@ public class PlayerController : MonoBehaviour
     void SetHealthText()
     {
         healthText.text = $"Health: {this.health}";
+    }
+
+    void GoalReached()
+    {
+        winLoseBG.color = Color.green;
+        winLoseText.text = "You Win!";
+        winLoseText.color = Color.black;
+        winLoseBG.gameObject.SetActive(true);
+    }
+
+    void LoseCon()
+    {
+        winLoseBG.color = Color.red;
+        winLoseText.text = "Game Over!";
+        winLoseText.color = Color.white;
+        winLoseBG.gameObject.SetActive(true);
+    }
+
+    IEnumerator LoadScene(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

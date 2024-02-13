@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 100f;
     private int score = 0;
     public int health = 5;
+    public TMP_Text scoreText;
 
     void Start()
     {
@@ -41,7 +43,8 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Pickup"))
         {
             score++;
-            Debug.Log($"Score: {score}");
+            SetScoreText();
+            // Debug.Log($"Score: {score}");
             Destroy(other.gameObject);
         }
         if (other.CompareTag("Trap"))
@@ -53,5 +56,10 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("You win!");
         }
+    }
+
+    void SetScoreText()
+    {
+        scoreText.text = $"Score: {this.score}";
     }
 }
